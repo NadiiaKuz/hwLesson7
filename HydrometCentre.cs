@@ -1,34 +1,28 @@
-﻿using System.Diagnostics;
-
-
-namespace hwLesson7
+﻿namespace hwLesson7
 {
     class HydrometCentre
     {
         private Temperature[] temperatures;
 
-        public HydrometCentre(Temperature temperature1, Temperature temperature2, Temperature temperature3, Temperature temperature4, Temperature temperature5)
+        public HydrometCentre(params Temperature[] temperatures)
         {
-            temperatures = new Temperature[] {temperature1, temperature2, temperature3, temperature4, temperature5};
+            this.temperatures = temperatures;
         }
 
-        public void GetTemperatureByDate(string date)
+        public string GetTemperatureByDate(string date)
         {
             for (int i = 0; i < temperatures.Length; i++)
             {
                 if (temperatures[i].Date == date)
                 {
-                    temperatures[i].GetInformation();
-                    return;
+                    return temperatures[i].GetInformation();
                 }
             }
-            Console.WriteLine("Date not found");
+            return "Date not found";
         }
 
-        public Temperature GetTemperatureByIndex(int index)
-        {
-            return temperatures[index];
-        }
+        public Temperature GetTemperatureByIndex(int index) =>
+            temperatures[index];
 
         public int this[string index]
         {

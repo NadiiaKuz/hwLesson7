@@ -12,13 +12,14 @@
 
             HydrometCentre hydrometCentre = new HydrometCentre(temperature1, temperature2, temperature3, temperature4, temperature5);
 
-            //string date = "14.03.2023";
-            //hydrometCentre.GetTemperatureByDate(date);
+            string date = "14.03.2023";
+            Console.WriteLine(hydrometCentre.GetTemperatureByDate(date));
 
             string startDate = "13.03.2023";
             string endDate = "15.03.2023";
 
             GetTemperatureByPeriod(hydrometCentre, startDate, endDate);
+
         }
 
         public static void GetTemperatureByPeriod(HydrometCentre hydrometCentre, string start, string end)
@@ -41,7 +42,8 @@
 
             for (int i = startPos; i <= endPos; i++)
             {
-                hydrometCentre.GetTemperatureByIndex(i).GetInformation();
+                string result = hydrometCentre.GetTemperatureByIndex(i).GetInformation();
+                Console.WriteLine(result);
             }
         }
     }

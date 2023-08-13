@@ -2,10 +2,10 @@
 {
     struct Temperature
     {
-        public string Date { get; set; }
-        public double Celsius { get; set; }
-        public double Fahrenheit { get; set; }
-        public double Kelvin { get; set; }
+        public string Date { get; }
+        public double Celsius { get; }
+        public double Fahrenheit { get; }
+        public double Kelvin { get; }
 
         public Temperature(string date, double celsius, double farenheit, double celvin)
         {
@@ -15,9 +15,7 @@
             Kelvin = celvin;
         }
 
-        public void GetInformation()
-        {
-            Console.WriteLine($"{Date} temperature was {Celsius} C, {Fahrenheit} F, {Kelvin} K");
-        }
+        public string GetInformation() =>
+            $"{Date} temperature was {Celsius} C, {Fahrenheit} F, {Kelvin} K";
     }
 }
