@@ -9,34 +9,65 @@
             this.temperatures = temperatures;
         }
 
-        public string GetTemperatureByDate(string date)
+        public Temperature this[string date]
+        {
+            get => GetTemperatureByDate(date);
+        }
+
+        public Temperature[] this[string start, string end]
+        {
+            get => GetTemperaturesByPeriod(start, end);
+        }
+
+        private int GetIndex(string date)
         {
             for (int i = 0; i < temperatures.Length; i++)
             {
-                if (temperatures[i].Date == date)
+                if (temperatures[i].Date == date.Trim())
                 {
-                    return temperatures[i].GetInformation();
+                    return i;
                 }
             }
-            return "Date not found";
+
+            return -1;
         }
 
-        public Temperature GetTemperatureByIndex(int index) =>
-            temperatures[index];
-
-        public int this[string index]
+        private Temperature GetTemperatureByDate(string date)
         {
-            get
+            for (int i = 0; i < temperatures.Length; i++)
             {
-                for (int i = 0; i < temperatures.Length; i++)
+                if (temperatures[i].Date == date.Trim())
                 {
-                    if (temperatures[i].Date == index)
-                    {
-                        return i;
-                    }
+                    return temperatures[i];
                 }
-                return -1;
             }
+
+            return new Temperature();
+        }
+
+        private Temperature[] GetTemperaturesByPeriod(string start, string end)
+        {
+            int startPos = GetIndex(start);
+
+            if (startPos == -1)
+            {
+                return Array.Empty<Temperature>();
+            }
+
+            int endPos = GetIndex(end);
+
+            if (endPos == -1)
+            {
+                return Array.Empty<Temperature>();
+            }
+
+            Temperature[] temp = new Temperature[endPos-startPos+1]; 
+            for (int i = 0; i < temp.Length; i++)
+            {
+                temp[i] = temperatures[startPos + i];
+            }
+
+            return temp;
         }
     }
 }
