@@ -7,12 +7,12 @@
         public double Fahrenheit { get; }
         public double Kelvin { get; }
 
-        public Temperature(string date, double celsius, double farenheit, double celvin)
+        public Temperature(string date, double celsius)
         {
             Date = date;
             Celsius = celsius;
-            Fahrenheit = farenheit;
-            Kelvin = celvin;
+            Fahrenheit = (celsius * 1.8) + 32;
+            Kelvin = celsius + 273.15;
         }
 
         public string GetInformation() =>
